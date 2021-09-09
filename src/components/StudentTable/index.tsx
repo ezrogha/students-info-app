@@ -7,6 +7,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import CreateIcon from '@material-ui/icons/Create';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import { useStyles } from './styles';
 
@@ -61,6 +63,8 @@ export default ({ columns, rows }: TableProps) => {
                                 const cellValue = row[column.id]
                                 return <TableCell key={column.id}>{cellValue}</TableCell>
                             })}
+                            <TableCell><CreateIcon /></TableCell>
+                            <TableCell><DeleteIcon /></TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

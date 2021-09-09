@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { DataGrid, GridAddIcon, GridColDef, GridValueGetterParams } from '@mui/x-data-grid'
 import { Button, Container, Icon, Theme } from '@material-ui/core';
 import StudentTable from './components/StudentTable'
+import NewStudentModal from './components/NewStudentModal'
 import studentData from "./data.json";
 
 const columns = studentData.columns
@@ -11,6 +12,16 @@ const rows = studentData.rows
 
 const App = () => {
   const classes = useStyles();
+
+  const [openAddStudentModal, setAddStudentModal] = React.useState(false);
+
+  const handleOpenStudentModal = () => {
+    setAddStudentModal(true);
+  };
+
+  const handleCloseStudentModal = () => {
+    setAddStudentModal(false);
+  };
 
   return (
     <Container className={classes.root}>
@@ -23,7 +34,15 @@ const App = () => {
         color="secondary"
         className={classes.button}
         startIcon={<GridAddIcon />}
+        onClick={handleOpenStudentModal}
       >Add Student</Button>
+
+      <NewStudentModal
+        { ...{
+          open: openAddStudentModal,
+          handleClose: handleCloseStudentModal
+        }}/>
+
     </Container>
   )
 }
