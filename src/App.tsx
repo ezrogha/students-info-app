@@ -19,7 +19,8 @@ import { ADD_STUDENT, DELETE_STUDENT, FETCH_STUDENTS, UPDATE_STUDENT } from './n
 import { InitialStudentState, initialStudentState } from "./components/constants";
 
 const columns = studentData.columns
-const rows = studentData.rows
+
+const serverUrl = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_REMOTE_URL : process.env.REACT_APP_BASE_URL
 
 interface studentDataUpdate {
   key: string
@@ -44,40 +45,14 @@ const App = () => {
     refetchQueries: [FETCH_STUDENTS]
   })
 
-  if(fetchError) {
-    console.log("FETCH ERROR", fetchError)
+  if(fetchError || addError || updateError || deleteError) {
+    const error = fetchError || addError || updateError || deleteError
+    console.error("Error:", error);    
   }
 
-  const addNewStudent = () => {
-    createStudent({
-      variables: studentData
-    })
-
-    if(addError){
-      console.log("ADD ERROR", addError)
-    }
-  }
-
-  const editStudent = () => {
-    updateStudent({
-      variables: studentData
-    })
-
-    if(updateError){
-      console.log("EDIT ERROR", updateError)
-    }
-  }
-
-  const removeStudent = (studentId: number) => {
-    console.log("studentId:", studentId)
-    deleteStudent({
-      variables: { id: studentId}
-    })
-
-    if(deleteError){
-      console.log("DELETE ERROR", deleteError)
-    }
-  }
+  const addNewStudent = () => createStudent({ variables: studentData })
+  const editStudent = () => updateStudent({ variables: studentData })
+  const removeStudent = (studentId: number) => deleteStudent({ variables: { id: studentId} })
 
   const selectedStudent = (studentObject: InitialStudentState) => {
     setStudentData(studentObject)
@@ -135,7 +110,7 @@ const App = () => {
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  uri: "http://localhost:1337/graphql"
+  uri: `${serverUrl}/graphql`
 });
 
 export default () => (
