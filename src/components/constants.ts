@@ -31,7 +31,17 @@ export const NEW_STUDENT_FORM = [
     }
 ]
 
-export const initialStudentState = {
+export interface InitialStudentState {
+    id?: number
+    firstName: string
+    lastName: string
+    DOB: string
+    course: string
+    gender: string
+    faculty: string
+}
+
+export const initialStudentState: InitialStudentState = {
     firstName: "",
     lastName: "",
     DOB: "",

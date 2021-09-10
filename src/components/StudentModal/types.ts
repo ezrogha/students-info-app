@@ -1,3 +1,5 @@
+import { InitialStudentState } from "../constants";
+
 interface StudentUpdate {
     key: string
     value: string
@@ -8,4 +10,5 @@ export interface StudentProps {
     handleClose: () => void
     handleStudentData: (data: StudentUpdate) => void
     handleSubmit: () => void
+    studentData: InitialStudentState
 }

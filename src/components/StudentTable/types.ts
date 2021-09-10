@@ -1,3 +1,5 @@
+import { InitialStudentState } from "../constants";
+
 export type columnType = "first_name" |
     "last_name" |
     "course" |
@@ -21,4 +23,6 @@ export interface TableProps {
     columns: Column[]
     rows: Row[]
     handleOpenStudentModal: (isEditable: boolean) => void
+    selectedStudent: (data: InitialStudentState) => void
+    removeStudent: (id: number) => void
 }

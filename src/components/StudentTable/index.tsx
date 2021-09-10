@@ -16,7 +16,9 @@ import { TableProps } from './types';
 export default ({
     columns,
     rows,
-    handleOpenStudentModal
+    handleOpenStudentModal,
+    selectedStudent,
+    removeStudent
 }: TableProps) => {
 
     const classes = useStyles()
@@ -47,8 +49,13 @@ export default ({
                                 const cellValue = row[column.id]
                                 return <TableCell key={column.id}>{cellValue}</TableCell>
                             })}
-                            <TableCell><CreateIcon className={`${classes.tableEditIcon} ${classes.tableIcons}`} onClick={() => handleOpenStudentModal(true)} /></TableCell>
-                            <TableCell><DeleteIcon className={`${classes.tableDeleteIcon} ${classes.tableIcons}`} /></TableCell>
+                            <TableCell><CreateIcon className={`${classes.tableEditIcon} ${classes.tableIcons}`} onClick={() => {
+                                selectedStudent(row)
+                                handleOpenStudentModal(true)
+                            }} /></TableCell>
+                            <TableCell><DeleteIcon className={`${classes.tableDeleteIcon} ${classes.tableIcons}`} onClick={() => {
+                                removeStudent(row?.id)
+                            }} /></TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

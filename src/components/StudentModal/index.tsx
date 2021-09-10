@@ -1,10 +1,11 @@
+// @ts-nocheck
 import React from 'react'
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@material-ui/core'
 import { NEW_STUDENT_FORM } from '../constants'
 import { useStyles } from './styles'
 import { StudentProps } from './types'
 
-export default ({ open, handleClose, isEdit=false, handleStudentData, handleSubmit }: StudentProps) => {
+export default ({ open, handleClose, isEdit=false, handleStudentData, handleSubmit, studentData }: StudentProps) => {
     const classes = useStyles()
     const modalTitle = isEdit ? "Edit Student" : "Add New Student"
     const modalButton = isEdit ? "Edit" : "Add"
@@ -21,11 +22,13 @@ export default ({ open, handleClose, isEdit=false, handleStudentData, handleSubm
                 {NEW_STUDENT_FORM.map((formField) => {
                     return (
                         <TextField
+                            key={formField.name}
                             fullWidth
                             className={classes.modalTextInput}
                             label={formField.label}
                             variant="outlined"
                             type={formField.type}
+                            value={studentData[formField.name]}
                             onChange={e => {
                                 handleStudentData({ 
                                     key: formField.name,

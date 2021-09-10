@@ -15,8 +15,8 @@ import StudentTable from './components/StudentTable'
 import StudentModal from './components/StudentModal'
 import studentData from "./data.json";
 import { useStyles } from './styles';
-import { ADD_STUDENT, FETCH_STUDENTS } from './network/apiRequests';
-import { initialStudentState } from "./components/constants";
+import { ADD_STUDENT, DELETE_STUDENT, FETCH_STUDENTS, UPDATE_STUDENT } from './network/apiRequests';
+import { InitialStudentState, initialStudentState } from "./components/constants";
 
 const columns = studentData.columns
 const rows = studentData.rows
@@ -34,7 +34,15 @@ const App = () => {
   const [studentData, setStudentData] = useState(initialStudentState)
 
   const { error: fetchError, loading, data:fetchedStudents  } = useQuery(FETCH_STUDENTS)
-  const [createStudent, { error: addError }] = useMutation(ADD_STUDENT)
+  const [createStudent, { error: addError }] = useMutation(ADD_STUDENT, {
+    refetchQueries: [FETCH_STUDENTS]
+  })
+  const [updateStudent, { error: updateError }] = useMutation(UPDATE_STUDENT, {
+    refetchQueries: [FETCH_STUDENTS]
+  })
+  const [deleteStudent, { error: deleteError }] = useMutation(DELETE_STUDENT, {
+    refetchQueries: [FETCH_STUDENTS]
+  })
 
   if(fetchError) {
     console.log("FETCH ERROR", fetchError)
@@ -51,7 +59,28 @@ const App = () => {
   }
 
   const editStudent = () => {
+    updateStudent({
+      variables: studentData
+    })
 
+    if(updateError){
+      console.log("EDIT ERROR", updateError)
+    }
+  }
+
+  const removeStudent = (studentId: number) => {
+    console.log("studentId:", studentId)
+    deleteStudent({
+      variables: { id: studentId}
+    })
+
+    if(deleteError){
+      console.log("DELETE ERROR", deleteError)
+    }
+  }
+
+  const selectedStudent = (studentObject: InitialStudentState) => {
+    setStudentData(studentObject)
   }
 
   const handleStudentData = (data: studentDataUpdate) => {
@@ -77,7 +106,9 @@ const App = () => {
         {...{
           rows: fetchedStudents?.students || [],
           columns,
-          handleOpenStudentModal
+          handleOpenStudentModal,
+          selectedStudent,
+          removeStudent
         }}
       />
       <Button
@@ -94,7 +125,8 @@ const App = () => {
           handleClose: handleCloseStudentModal,
           isEdit: isModalEditable,
           handleStudentData,
-          handleSubmit: isModalEditable ? editStudent : addNewStudent 
+          studentData,
+          handleSubmit: isModalEditable ? editStudent : addNewStudent
         }} />
 
     </Container>
