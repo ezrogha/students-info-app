@@ -6,7 +6,7 @@ export type columnType = "first_name" |
 
 export interface Column {
     id: string
-    label: string    
+    label: string
 }
 
 export interface Row {

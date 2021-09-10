@@ -41,7 +41,7 @@ export default ({
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row) => (
+                    {rows?.map((row) => (
                         <TableRow>
                             {columns.map((column) => {
                                 const cellValue = row[column.id]

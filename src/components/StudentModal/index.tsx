@@ -4,7 +4,7 @@ import { NEW_STUDENT_FORM } from '../constants'
 import { useStyles } from './styles'
 import { StudentProps } from './types'
 
-export default ({ open, handleClose, isEdit=false }: StudentProps) => {
+export default ({ open, handleClose, isEdit=false, handleStudentData, handleSubmit }: StudentProps) => {
     const classes = useStyles()
     const modalTitle = isEdit ? "Edit Student" : "Add New Student"
     const modalButton = isEdit ? "Edit" : "Add"
@@ -25,6 +25,13 @@ export default ({ open, handleClose, isEdit=false }: StudentProps) => {
                             className={classes.modalTextInput}
                             label={formField.label}
                             variant="outlined"
+                            type={formField.type}
+                            onChange={e => {
+                                handleStudentData({ 
+                                    key: formField.name,
+                                    value: e.target.value
+                                })
+                            }}
                         />
                     )
                 })}
@@ -32,7 +39,10 @@ export default ({ open, handleClose, isEdit=false }: StudentProps) => {
                     fullWidth
                     variant="contained"
                     className={classes.modalButton}
-                    onClick={handleClose}
+                    onClick={() => {
+                        handleSubmit()
+                        handleClose()
+                    }}
                     color="primary"
                     autoFocus>
                     {modalButton}

@@ -10,7 +10,12 @@ export const NEW_STUDENT_FORM = [
         type: 'text'
     },
     {
-        name: 'dob',
+        name: 'gender',
+        label: 'Gender',
+        type: 'text'
+    },
+    {
+        name: 'DOB',
         label: 'Date Of Birth',
         type: 'date'
     },
@@ -25,3 +30,12 @@ export const NEW_STUDENT_FORM = [
         type: 'text'
     }
 ]
+
+export const initialStudentState = {
+    firstName: "",
+    lastName: "",
+    DOB: "",
+    course: "",
+    gender: "",
+    faculty: ""
+}

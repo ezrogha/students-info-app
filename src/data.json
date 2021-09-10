@@ -1,103 +1,107 @@
 {
     "columns": [
         {
-            "id": "first_name",
+            "id": "firstName",
             "label": "First Name"
         },
         {
-            "id": "last_name",
+            "id": "lastName",
             "label": "Last Name"
-        },
-        {
-            "id": "course",
-            "label": "Course"
         },
         {
             "id": "gender",
             "label": "Gender"
         },
         {
+            "id": "DOB",
+            "label": "DOB"
+        },
+        {
+            "id": "course",
+            "label": "Course"
+        },
+        {
             "id": "faculty",
             "label": "Faculty"
-        }
+        }        
     ],
     "rows": [
         {
             "id": 1,
-            "first_name": "Veronika",
-            "last_name": "Ivanishchev",
+            "firstName": "Veronika",
+            "lastName": "Ivanishchev",
             "course": "com.com.Asoka",
             "gender": "Polygender",
             "faculty": "Carlow Institute of Technology"
         },
         {
             "id": 2,
-            "first_name": "Steven",
-            "last_name": "Scotcher",
+            "firstName": "Steven",
+            "lastName": "Scotcher",
             "course": "gov.senate.Alpha",
             "gender": "Genderqueer",
             "faculty": "Medical University of Sofia"
         },
         {
             "id": 3,
-            "first_name": "Christoffer",
-            "last_name": "Netherclift",
+            "firstName": "Christoffer",
+            "lastName": "Netherclift",
             "course": "com.patch.Sonsing",
             "gender": "Polygender",
             "faculty": "Barat College"
         },
         {
             "id": 4,
-            "first_name": "David",
-            "last_name": "Relf",
+            "firstName": "David",
+            "lastName": "Relf",
             "course": "com.shutterfly.Redhold",
             "gender": "Non-binary",
             "faculty": "State University of New York at Buffalo"
         },
         {
             "id": 5,
-            "first_name": "Dalt",
-            "last_name": "Mont",
+            "firstName": "Dalt",
+            "lastName": "Mont",
             "course": "uk.co.guardian.Mat Lam Tam",
             "gender": "Genderqueer",
             "faculty": "University Politehnica of Bucharest"
         },
         {
             "id": 6,
-            "first_name": "Thurston",
-            "last_name": "Lampl",
+            "firstName": "Thurston",
+            "lastName": "Lampl",
             "course": "com.canalblog.Trippledex",
             "gender": "Genderfluid",
             "faculty": "Medizinische Hochschule Hannover"
         },
         {
             "id": 7,
-            "first_name": "Dom",
-            "last_name": "Manton",
+            "firstName": "Dom",
+            "lastName": "Manton",
             "course": "com.washingtonpost.Zaam-Dox",
             "gender": "Non-binary",
             "faculty": "Dhofar University"
         },
         {
             "id": 8,
-            "first_name": "Jone",
-            "last_name": "Dasent",
+            "firstName": "Jone",
+            "lastName": "Dasent",
             "course": "jp.ne.sakura.Konklab",
             "gender": "Genderfluid",
             "faculty": "Escuela Politécnica del Ejercito"
         },
         {
             "id": 9,
-            "first_name": "Yvor",
-            "last_name": "Finnemore",
+            "firstName": "Yvor",
+            "lastName": "Finnemore",
             "course": "org.dmoz.Overhold",
             "gender": "Genderfluid",
             "faculty": "Conestoga College"
         },
         {
             "id": 10,
-            "first_name": "Emlyn",
-            "last_name": "Gaenor",
+            "firstName": "Emlyn",
+            "lastName": "Gaenor",
             "course": "com.delicious.Toughjoyfax",
             "gender": "Agender",
             "faculty": "Kobe Shinwa Women's University"
