@@ -2,14 +2,12 @@ import React from 'react'
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@material-ui/core'
 import { NEW_STUDENT_FORM } from '../constants'
 import { useStyles } from './styles'
+import { StudentProps } from './types'
 
-interface NewStudentProps {
-    open: boolean
-    handleClose: () => void
-}
-
-export default ({ open, handleClose }: NewStudentProps) => {
+export default ({ open, handleClose, isEdit=false }: StudentProps) => {
     const classes = useStyles()
+    const modalTitle = isEdit ? "Edit Student" : "Add New Student"
+    const modalButton = isEdit ? "Edit" : "Add"
 
     return (
         <Dialog
@@ -18,7 +16,7 @@ export default ({ open, handleClose }: NewStudentProps) => {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
-            <DialogTitle id="alert-dialog-title">{"Add New Student"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{modalTitle}</DialogTitle>
             <DialogContent>
                 {NEW_STUDENT_FORM.map((formField) => {
                     return (
@@ -37,7 +35,7 @@ export default ({ open, handleClose }: NewStudentProps) => {
                     onClick={handleClose}
                     color="primary"
                     autoFocus>
-                    Add
+                    {modalButton}
                 </Button>
             </DialogContent>
         </Dialog>

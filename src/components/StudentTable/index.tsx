@@ -11,32 +11,14 @@ import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 import { useStyles } from './styles';
+import { TableProps } from './types';
 
-type columnType = "first_name" |
-    "last_name" |
-    "course" |
-    "gender" |
-    "faculty"
+export default ({
+    columns,
+    rows,
+    handleOpenStudentModal
+}: TableProps) => {
 
-interface Column {
-    id: string
-    label: string
-}
-
-interface Row {
-    first_name: string
-    last_name: string
-    course: string
-    gender: string
-    faculty: string
-}
-
-interface TableProps {
-    columns: Column[]
-    rows: Row[]
-}
-
-export default ({ columns, rows }: TableProps) => {
     const classes = useStyles()
 
     return (
@@ -48,12 +30,14 @@ export default ({ columns, rows }: TableProps) => {
                             columns.map((column) => {
                                 return (
                                     <TableCell
-                                        className={classes.tableCell}
+                                        className={classes.tableHeaderCell}
                                         key={column.id}
                                         style={{ minWidth: 150 }}
                                     >{column.label}</TableCell>)
                             })
                         }
+                        <TableCell className={classes.tableHeaderCell} />
+                        <TableCell className={classes.tableHeaderCell} />
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -63,8 +47,8 @@ export default ({ columns, rows }: TableProps) => {
                                 const cellValue = row[column.id]
                                 return <TableCell key={column.id}>{cellValue}</TableCell>
                             })}
-                            <TableCell><CreateIcon /></TableCell>
-                            <TableCell><DeleteIcon /></TableCell>
+                            <TableCell><CreateIcon className={`${classes.tableEditIcon} ${classes.tableIcons}`} onClick={() => handleOpenStudentModal(true)} /></TableCell>
+                            <TableCell><DeleteIcon className={`${classes.tableDeleteIcon} ${classes.tableIcons}`} /></TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

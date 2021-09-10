@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { DataGrid, GridAddIcon, GridColDef, GridValueGetterParams } from '@mui/x-data-grid'
 import { Button, Container, Icon, Theme } from '@material-ui/core';
 import StudentTable from './components/StudentTable'
-import NewStudentModal from './components/NewStudentModal'
+import StudentModal from './components/StudentModal'
 import studentData from "./data.json";
 
 const columns = studentData.columns
@@ -13,34 +13,41 @@ const rows = studentData.rows
 const App = () => {
   const classes = useStyles();
 
-  const [openAddStudentModal, setAddStudentModal] = React.useState(false);
+  const [openStudentModal, setStudentModal] = React.useState(false);
+  const [isModalEditable, setIsModalEditable] = React.useState(false)
 
-  const handleOpenStudentModal = () => {
-    setAddStudentModal(true);
+  const handleOpenStudentModal = (isEditable: boolean) => {
+    setIsModalEditable(isEditable)
+    setStudentModal(true);
   };
 
   const handleCloseStudentModal = () => {
-    setAddStudentModal(false);
+    setStudentModal(false);
   };
 
   return (
     <Container className={classes.root}>
       <h1 className={classes.heading}>Student Portal</h1>
       <StudentTable
-        {...{ rows, columns }}
+        {...{
+          rows,
+          columns,
+          handleOpenStudentModal
+        }}
       />
       <Button
         variant="contained"
         color="secondary"
         className={classes.button}
         startIcon={<GridAddIcon />}
-        onClick={handleOpenStudentModal}
+        onClick={() => handleOpenStudentModal(false)}
       >Add Student</Button>
 
-      <NewStudentModal
+      <StudentModal
         { ...{
-          open: openAddStudentModal,
-          handleClose: handleCloseStudentModal
+          open: openStudentModal,
+          handleClose: handleCloseStudentModal,
+          isEdit: isModalEditable
         }}/>
 
     </Container>
